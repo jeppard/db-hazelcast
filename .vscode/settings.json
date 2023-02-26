@@ -213,5 +213,6 @@
             72, 50
         ]
     },
-    "cSpell.language": "en"
+    "cSpell.language": "en",
+    "cSpell.enabled": false
 }
