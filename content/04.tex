@@ -4,13 +4,69 @@
 The goal of this section is to test Hazelcast in practice. With this goal in
 mind, we will first install Hazelcast, and then we will try to implement some
 example data structures. We will take a look at the Usability of the Hazelcast
-interface.
+interface. 
+
+In this section following limitations are taken into account: First only the
+Open-Source Hazelcast Platform is used. Second, only the Hazelcast Command Line
+Interface (CLI) is used. Therefore the Hazelcast cloud service Viridian is not
+used and will not be evaluated. Furthermore, the Hazelcast Clients outside of
+the Hazelcast CLI are not used, and will not be evaluated. The datastructure
+used for testing is taken from a previous lecture.
 \todo{}
 \subsection{Installation of Hazelcast}
 There are multiple ways to install Hazelcast. Due to the fact that Hazelcast is
-open-source and provides Binaries. 
+open-source and provides Binaries. Therefore, it's possible to build the
+Hazelcast Plattform from source. However, it is easier to download the prebuild
+binaries. For Linux there is a debian package available. For MacOS there is a
+brew package available, but for Windows there is no package or installer
+available. Therefore, under Windows you have to download the prebuild binaries,
+if you don't want to build Hazelcast from source. Another option is to use
+docker. \parencite{hazelcast_installing_nodate}
+
+We tried the Hazelcast installation on multiple operating systems, but weren't
+able to test the installation on MacOS. Therefore, we will only describe the
+installation on Linux and Windows, and will take a look at the installation via
+docker. The installation on Linux is very easy and straight forward: First you
+will download the public key of the Hazelcast repository and add the repository
+to your package manager sources:
+\begin{lstlisting}[language=bash,caption={Adding the Hazelcast repository to the package manager sources under Linux (Debian) \parencite{hazelcast_installing_nodate}}]
+wget -qO - https://repository.hazelcast.com/api/gpg/key/public | gpg --dearmor | sudo tee /usr/share/keyrings/hazelcast-archive-keyring.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/hazelcast-archive-keyring.gpg] https://repository.hazelcast.com/debian stable main" | sudo tee -a /etc/apt/sources.list
+\end{lstlisting}
+After that you will be able to install Hazelcast via the package manager like
+any other package:
+\begin{lstlisting}[language=bash,caption={Installing Hazelcast under Linux (Debian) \parencite{hazelcast_installing_nodate}}]
+sudo apt update && sudo apt install hazelcast
+\end{lstlisting}
+The installation under Windows was a bit more complicated. First of all
+Hazelcast did not provide a Windows installer. Therefore, we had to download the
+binary from the Hazelcast website. This binary wasn't able to run directly,
+because it needed the \texttt{JAVA\_HOME} enviroment variable to be set. First we
+tried to install a Java Runtime Environment (JRE) and set the \texttt{JAVA\_HOME}
+variable accordingly. However the JRE was not able to run the Hazelcast binary
+and a Java Development Kit (JDK) was needed. Therefore, we installed the JDK set
+the path, and then the Hazelcast binary was able to run. However, personally we
+found the installation with docker the easiest. 
+First of all, the Hazelcast image is downloaded from the docker hub:
+\begin{lstlisting}[language=bash,caption={Downloading the Hazelcast image from the docker hub \parencite{hazelcast_installing_nodate}}]
+docker pull hazelcast/hazelcast
+\end{lstlisting}
+After that the local Hazelcast Cluster is started as spezified in the
+documentation:
+\begin{lstlisting}[language=bash,caption={Starting the Hazelcast Cluster using the docker image \parencite{hazelcast_start_2023}}]
+docker network create hazelcast-network
+docker run \
+    -it \
+    --network hazelcast-network \
+    --rm \
+    -e HZ_CLUSTERNAME=hello-world \
+    -p 5701:5701 hazelcast/hazelcast
+\end{lstlisting}
+
+For the following example the docker installation will be used. 
+
+\subsection{Example in Hazelcast}
 \todo{}
+
 \subsection{Usage and API of Hazelcast}
-\todo{}
-\subsection{Examples in Hazelcast}
-\todo{}
+\todo{Überlegen ob ich noch mehr schreiben will}
