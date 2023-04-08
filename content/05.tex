@@ -7,4 +7,12 @@
 \subsection{Disadvantages of Hazelcast}
 \todo{}
 \subsection{Lessons learned}
-\todo{}
+This paragraph contains a short summary of the lessons learned during the
+evaluation of Hazelcast in Practice. First, Hazelcast is easiest to
+install via docker. Secondly the Hazelcast CLI is easy to use with common SQL
+like syntax, but has some limitations and differences. Mainly in Hazelcast the
+common concept is a map (Mapping) instead of a table. As a user you have to
+create mappings and not tables. After that you should take a look at the
+Hazelcast Client APIs to use Hazelcast from within your application. These
+Clients are currently available for Java, .NET, C++, Node.js, Python and Go
+\parencite{noauthor_clients_nodate}.

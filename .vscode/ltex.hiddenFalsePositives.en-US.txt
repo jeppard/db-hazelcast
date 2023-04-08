@@ -1,0 +1,2 @@
+{"rule":"LOCAL","sentence":"^\\QFirst of all, the Hazelcast image is downloaded from the docker hub: After that the local Hazelcast Cluster is started as specified in the documentation:\\E$"}
+{"rule":"PUBLIC","sentence":"^\\QThe installation on Linux is very easy and straight forward: First you will download the public key of the Hazelcast repository and add the repository to your package manager sources: After that you will be able to install Hazelcast via the package manager like any other package: The installation under Windows was a bit more complicated.\\E$"}
