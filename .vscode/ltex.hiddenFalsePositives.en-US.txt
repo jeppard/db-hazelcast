@@ -1,0 +1,1 @@
+{"rule":"CONSEQUENT","sentence":"^\\QConsequently, a node in the process of writing data can be interrupted due to a node failure and leave the system in an inconsistent state.\\E$"}

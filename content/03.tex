@@ -1,17 +1,71 @@
 % !TeX root = ..\main.tex
 
-\section{Hazelcast in Theory}
-Hazelcast, or formally known as Hazelcast IMDG, is an In-Memory Datagrid written in Java by the Hazelcast corporation. It is a cluster storage and combines "Data at Rest" with "Data in Motion" by providing a streaming architecture for dynamic data together with low-latency storage for static data.\parencite{HZintro} \parencite{hazelcast_what_2022}
+\section{Hazelcast in theory}
+Hazelcast, or formerly known as Hazelcast IMDG, is an In-Memory Data grid
+written in Java by the Hazelcast corporation. It is a cluster storage and
+combines \enquote{Data at Rest} with \enquote{Data in Motion} by providing a streaming
+architecture for dynamic data together with low-latency storage for static
+data. \parencite{HZintro, hazelcast_what_2022}
+
 \subsection{Architecture of Hazelcast}
-At the core of the Hazelcast platform stands the distributed architecture of cluster nodes with the streaming engine and the low-latency storage. A cluster consists of at least one node. The streaming engine is in the form of a Kappa-Architecture which, compared to a Lambda-Architecture, provides the same methodology for data processing. The low-latency storage provides availability and partition tolerance with possible consistency through the use of the CP-subsystem. Hazelcast offers different possibilities for a client to connect to the cluster through the use of APIs and Connectors. Implementations exist for multiple languages, including Java, C++, Node.js, Python and Go.\parencite{hazelcast_what_2022} \parencite{HZclient}
-Encapsulating the Connectors and the cluster are the security features of Hazelcast for clients and nodes. This includes the authentication of new nodes and clients, as well as the encryption of traffic between the nodes or between a client and the cluster.
+At the core of the Hazelcast platform stands the distributed architecture of
+cluster nodes with the streaming engine and the low-latency storage. A cluster
+consists of at least one node. The streaming engine is in the form of a
+Kappa-Architecture which, compared to a Lambda-Architecture, provides the same
+methodology for data processing. The low-latency storage provides availability
+and partition tolerance with possible consistency through the use of the
+CP-subsystem. Hazelcast offers different possibilities for a client to connect
+to the cluster through the use of APIs and Connectors. Implementations exist for
+multiple languages, including Java, C++, Node.js, Python and
+Go. \parencite{hazelcast_what_2022, HZclient} Encapsulating the
+Connectors and the cluster are the security features of Hazelcast for clients
+and nodes. This includes the authentication of new nodes and clients, as well as
+the encryption of traffic between the nodes or between a client and the cluster.
+
 \subsection{Hazelcast in CAP-Theorem}
-The CAP-Theorem states, that a distributed system can not be partition tolerant, consistent and highly available at the same time, but can only fulfill two of the three properties. A 2010 article fruther adds, that partition tolerance cannot be sacrificed, because sacrificing partition tolerance would require a network to never drop any messages, which in reality cannot exist.\parencite{Brewer2000} \parencite{CodahalePart}\\
-Hazelcast is by default an AP-systen, favoring availability over consistency. Since each client interacts with the cluster through a gateway node and node failures can happen in a distributed system, Hazelcast replicates the data on backup nodes to ensure availability.\parencite{HZcap} \parencite{HZcap2}\\
-Some distributed datastructures, for example a Lock or a Semaphore, require strong consistency rather than high availability. For such cases, Hazelcast offers a CP-subsystem, which is built upon the cluster and allows for consistent storage of specified distributed objects. The subsystem is based on the RAFT consensus algorithm, through which the participating nodes in the subsystem can reach a consensus on correct data by periodic heartbeats and votings.\parencite{HZcap} \parencite{HZcpsub} \parencite{WoosRaft}\\
-Since Hazelcast is an In-Memory Data Grid, no persistence happens by default. To strengthen consistency of data structures, persistence can be configured for nodes in the CP-subsystem to persist the data to a non-volatile storage.\parencite{HZcpsub}
+The CAP-Theorem states, that a distributed system can not be partition tolerant,
+consistent and highly available at the same time, but can only fulfil two of
+the three properties. A 2010 article further adds, that partition tolerance
+cannot be sacrificed, because sacrificing partition tolerance would require a
+network to never drop any messages, which in reality cannot
+exist. \parencite{Brewer2000, CodahalePart}
+
+Hazelcast is by default an AP-system, favouring availability over consistency.
+Since each client interacts with the cluster through a gateway node and node
+failures can happen in a distributed system, Hazelcast replicates the data on
+backup nodes to ensure availability. \parencite{HZcap, HZcap2}
+
+Some distributed data structures, for example a Lock or a Semaphore, require
+strong consistency rather than high availability. For such cases, Hazelcast
+offers a CP-subsystem, which is built upon the cluster and allows for consistent
+storage of specified distributed objects. The subsystem is based on the RAFT
+(see \textcite{WoosRaft})
+consensus algorithm, through which the participating nodes in the subsystem can
+reach a consensus on correct data by periodic heartbeats and
+votings. \parencite{HZcap, HZcpsub, WoosRaft}
+
+Since Hazelcast is an In-Memory Data Grid, no persistence happens by default. To
+strengthen consistency of data structures, persistence can be configured for
+nodes in the CP-subsystem to persist the data to a non-volatile
+storage. \parencite{HZcpsub}
+
 \subsection{Hazelcast is BASE}
-The acronym BASE stands for Basically Available, Soft-State and Eventual Consistency and is used to describe a system with those properties \parencite{Brewer2000}. Hazelcast fits all of the three properties due to the following reasons:
-Due to Hazelcast being an AP-system, it prioritizes availability and can thus be considered basically available. Through periodic heartbeats between the cluster nodes, a failure in nodes can be detected and data from backup nodes can be fetched.\parencite{HZfailure}\\
-Due to the high availability offered by Hazelcast, an exact state of the cluster cannot be determined to a certain point in time. This is further amplified when choosing one-phase commits for transactions, where the commit log is not copied to other nodes. Consequently, a node in the process of writing data can be interrupted due to a node failure and leave the system in an inconsistent state. \parencite{HZtransactions}\\
-To prevent increasing entropy in the cluster, Hazelcast synchronizes the nodes in periodic intervals. The primary node, the node which is delegated to store the data, sends a summary of the data to its backup nodes. The backup nodes compare the data with their version and in the case of an inconsistency, the synchronisation process is triggered.\parencite{HZreplic}
+The acronym BASE stands for Basically Available, Soft-State and Eventual
+Consistency and is used to describe a system with those properties
+\parencite{Brewer2000}. Hazelcast fits all three properties due to the
+following reasons: Due to Hazelcast being an AP-system, it prioritizes
+availability and can thus be considered basically available. Through periodic
+heartbeats between the cluster nodes, a failure in nodes can be detected and
+data from backup nodes can be fetched. \parencite{HZfailure}\\
+Due to the high availability offered by Hazelcast, an exact state of the cluster
+cannot be determined to a certain point in time. This is further amplified when
+choosing one-phase commits for transactions, where the commit log is not copied
+to other nodes. Consequently, a node in the process of writing data can be
+interrupted due to a node failure and leave the system in an inconsistent state.
+\parencite{HZtransactions}
+
+To prevent increasing entropy in the cluster, Hazelcast synchronizes the nodes
+in periodic intervals. The primary node, the node which is delegated to store
+the data, sends a summary of the data to its backup nodes. The backup nodes
+compare the data with their version and in the case of an inconsistency, the
+synchronization process is triggered. \parencite{HZreplic}
