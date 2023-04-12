@@ -1,5 +1,5 @@
 {
-    "ltex.language": "en-US",
+    "ltex.language": "en-GB",
     "ltex.additionalRules.enablePickyRules": true,
     "ltex.additionalRules.motherTongue": "de-DE",
     "ltex.completionEnabled": true,
@@ -213,5 +213,6 @@
             72, 50
         ]
     },
-    "cSpell.language": "en"
+    "cSpell.language": "en",
+    "cSpell.enabled": false
 }
