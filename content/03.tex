@@ -8,8 +8,19 @@ architecture for dynamic data together with low-latency storage for static
 data. \parencite{HZintro, hazelcast_what_2022}
 
 \subsection{Architecture of Hazelcast}
-At the core of the Hazelcast platform stands the distributed architecture of cluster nodes with the streaming engine and the low-latency storage. A cluster consists of at least one node. The streaming engine is in the form of a Kappa-Architecture which, compared to a Lambda-Architecture, provides the same methodology for data processing. The low-latency storage provides availability and partition tolerance with possible consistency through the use of the CP-subsystem. Hazelcast offers different possibilities for a client to connect to the cluster through the use of APIs and Connectors. Implementations exist for multiple languages, including Java, .NET, C++, Node.js, Python and Go.\parencite{hazelcast_what_2022} \parencite{HZclient}
-Encapsulating the Connectors and the cluster are the security features of Hazelcast for clients and nodes. This includes the authentication of new nodes and clients, as well as the encryption of traffic between the nodes or between a client and the cluster.
+At the core of the Hazelcast platform stands the distributed architecture of
+cluster nodes with the streaming engine and the low-latency storage. A cluster
+consists of at least one node. The streaming engine is in the form of a
+Kappa-Architecture which, compared to a Lambda-Architecture, provides the same
+methodology for data processing. The low-latency storage provides availability
+and partition tolerance with possible consistency through the use of the
+CP-subsystem. Hazelcast offers different possibilities for a client to connect
+to the cluster through the use of APIs and Connectors. Implementations exist for
+multiple languages, including Java, .NET, C++, Node.js, Python and Go.
+\parencite{hazelcast_what_2022} \parencite{HZclient} Encapsulating the
+Connectors and the cluster are the security features of Hazelcast for clients
+and nodes. This includes the authentication of new nodes and clients, as well as
+the encryption of traffic between the nodes or between a client and the cluster.
 \subsection{Hazelcast in CAP-Theorem}
 The CAP-Theorem states, that a distributed system can not be partition tolerant,
 consistent and highly available at the same time, but can only fulfil two of
