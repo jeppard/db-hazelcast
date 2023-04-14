@@ -1,10 +1,52 @@
 % !TeX root = ..\main.tex
 
 \section{Key-Value-Stores}
-\todo{}
+
+Key-value stores are considered one of the simplest databases and belong to the group of NoSQL databases. 
+Compared to rational databases, which work with tables, key-value stores use the key-value method to store the data. \parencite{Key_Value_Datastore_Hazelcast}
+
+
 \subsection{History of Key-Value-Stores}
-\todo{Change}
+
+The history of the key-value store is difficult to trace due to poor documentation. 
+The first mention of the key-value method was in connection with Charles Babbage's analytical engine in 1837, where the key-value method was to be used to enter values into the analytical engine. 
+The first implementation of the same concept in computer science, however, was implemented in 1953 in the form of hashing. 
+Hashing implements key-value in the same way as databases do. 
+In the field of databases, the first implementation was in 1979 in the form of Ordered Key-Value-Stores. 
+Ordered key-value stores are key-value stores that sort keys. 
+Now that the history of key-value stores has been explained in more detail, the main elements of the concept will be discussed.\parencite{babge_table_cards, hash_table_history, ordered_key_value_history}
+
 \subsection{Working principle of Key-Value-Stores}
-\todo{}
+
+Key values are composed of two elements, a key and a value. 
+The key element must fulfil the condition of being unique. 
+This condition does not refer to the stored values, these do not have to be unique and can comprise different data types. 
+The data types can range from integer to complex Qbjects. 
+Data is thus always stored in with a value and a key. 
+In addition to storing data, searches within the database are limited by the key-value method. 
+All searches are always related to keys and cannot access values, so searches related to values are not possible as in rational databases. 
+Now that the basics of key-value stores have been explained, the advantages and disadvantages compared to rational databases will be discussed next. \parencite{Key_Value_Datastore_Hazelcast, Key_Value_Datastore}
+
 \subsection{Comparison of Key-Value-Stores to relational databases}
-\todo{}
+
+During the research, advantages and disadvantages of this database were identified. 
+The first advantage of a key-value store is the high speed and performance compared to relational databases.
+The second advantage is the possibility to scale the database efficiently. 
+All advantages can be traced back to the simple structure of the database. 
+In contrast to rational databases, key-value stores do not require uniform patterns. 
+Thus, the data can be retrieved quickly and the databases can be extended to new servers. 
+However, these characteristics are also a reason for the disadvantages of key-value stores. 
+The first disadvantage relates to the problem of efficiently representing complex connections in the database. 
+This disadvantage arises from the fact that data is only stored in key-value format and keys are only stored uniquely. 
+Complex connections are much easier to represent in relational databases. 
+The second disadvantage is the problem that no search queries can be made on the values. 
+This disadvantage also stems from the key-value method. 
+In order to clarify the advantages and disadvantages, the areas of application of this database will now be discussed in more detail. 
+The field of application of key-value stores is limited compared to relational databases. 
+This can largely be explained by the limitations of the structure. 
+Generally, key-value stores are used when large amounts of data need to be accessed quickly. 
+This is a typical case for applications such as shopping carts or session data. 
+Besides these applications, key-value stores can be used for in-memory data caching. 
+This type of use reduces reading and writing on weaker hard disks. 
+The Hazelcast database system also uses this system to retrieve data faster. 
+Hazelcast is discussed in more detail in the next section. \parencite{Key_Value_Datastore_Hazelcast, Key_Value_Datastore}
